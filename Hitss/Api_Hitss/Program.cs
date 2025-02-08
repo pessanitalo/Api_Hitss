@@ -1,4 +1,7 @@
 using Api_Hitss.Context;
+using Api_Hitss.Interface;
+using Api_Hitss.Repository;
+using Api_Hitss.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IPropostaRepository, PropostaRepository>();
+builder.Services.AddScoped<IPropostaService, PropostaService>();
+
+builder.Services.AddScoped<IPaymentFlowSummaryRepository, PaymentFlowSummaryRepository>();
+builder.Services.AddScoped<IPaymentScheduleRepository, PaymentScheduleRepository>();
+builder.Services.AddScoped<IPaymentScheduleService, PaymentScheduleService>();
 
 var app = builder.Build();
 

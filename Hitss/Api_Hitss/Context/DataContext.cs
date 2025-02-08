@@ -7,5 +7,6 @@ namespace Api_Hitss.Context
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Proposta> Proposta { get; set; }
+        public DbSet<PaymentFlowSummary> PaymentFlowSummary { get; set; }
     }
 }
