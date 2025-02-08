@@ -5,7 +5,7 @@ namespace Api_Hitss.Model
     public class PaymentFlowSummary
     {
         [Key]
-        public int Id { get; set; }
+        public int PaymentFlowSummary_Id { get; set; }
         public decimal MonthlyPayment { get; set; }
         public decimal TotalInterest { get; set; }
         public decimal TotalPayment { get; set; }
