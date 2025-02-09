@@ -5,19 +5,26 @@ namespace Api_Hitss.Service
 {
     public class PaymentScheduleCalcService : IPaymentScheduleCalcService
     {
-        public decimal Amortizacao()
+        public decimal Amortizacao(Proposta proposta)
         {
-            throw new NotImplementedException();
+            var parcelaFixaMensal = ParcelaMensalFixa(proposta);
+            var jurosMensal = Juros(proposta);
+            return parcelaFixaMensal - jurosMensal;
         }
 
         public decimal Juros(Proposta proposta)
         {
-            return proposta.LoanAmount * (proposta.AnnualInterestRate / 12);
+            return proposta.LoanAmount * TaxaJurosMensal(proposta);
+        }
+
+        public decimal TaxaJurosMensal(Proposta proposta)
+        {
+            return  proposta.AnnualInterestRate / 12;
         }
 
         public decimal ParcelaMensalFixa(Proposta proposta)
         {
-            decimal taxaJurosMensal = proposta.AnnualInterestRate /12;
+            decimal taxaJurosMensal = TaxaJurosMensal(proposta);
             decimal expo = 1 + taxaJurosMensal;
             decimal ValorEmprestimo = proposta.LoanAmount;
  
@@ -41,9 +48,13 @@ namespace Api_Hitss.Service
             }
             return result;
         }
-        public decimal SaldoAtual()
+        public decimal SaldoAtual(Proposta proposta)
         {
-            throw new NotImplementedException();
+            var saldoAtual = proposta.LoanAmount;
+            var valorAmortizado = Amortizacao(proposta);
+            return saldoAtual - valorAmortizado;
         }
+
+       
     }
 }

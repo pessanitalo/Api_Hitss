@@ -7,8 +7,8 @@ namespace Api_Hitss.Model
         [Key]
         public int PaymentSchedule_Id { get; set; }
         public int Month { get; set; }
-        public int Principal { get; set; }
-        public int Interest { get; set; }
-        public int Balance { get; set; }
+        public decimal Principal { get; set; }
+        public decimal Interest { get; set; }
+        public decimal Balance { get; set; }
     }
 }

@@ -5,8 +5,9 @@ namespace Api_Hitss.Interface
     public interface IPaymentScheduleCalcService
     {
         Decimal Juros(Proposta proposta);
-        Decimal Amortizacao();
-        Decimal SaldoAtual();
+        Decimal Amortizacao(Proposta proposta);
+        Decimal SaldoAtual(Proposta proposta);
         Decimal ParcelaMensalFixa(Proposta proposta);
+        Decimal TaxaJurosMensal(Proposta proposta);
     }
 }
