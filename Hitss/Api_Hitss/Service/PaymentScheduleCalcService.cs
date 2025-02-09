@@ -50,9 +50,9 @@ namespace Api_Hitss.Service
         }
         public decimal SaldoAtual(Proposta proposta)
         {
-            var saldoAtual = proposta.LoanAmount;
+            var saldo = proposta.LoanAmount;
             var valorAmortizado = Amortizacao(proposta);
-            return saldoAtual - valorAmortizado;
+            return saldo - valorAmortizado;
         }
 
        

@@ -31,9 +31,8 @@ namespace Api_Hitss.Service
                     Interest = _calcService.Juros(proposta),
                     Balance = _calcService.SaldoAtual(proposta)
                 };
-                //saldoAtual = paymentSchedule.Balance;
                 paymentSchedules.Add(paymentSchedule);
-                //paymentSchedule.Balance = saldoAtual;
+                proposta.LoanAmount = paymentSchedule.Balance;
             }
             _repository.Save(paymentSchedules);
         }
