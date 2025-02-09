@@ -22,6 +22,8 @@ builder.Services.AddScoped<IPaymentFlowSummaryRepository, PaymentFlowSummaryRepo
 builder.Services.AddScoped<IPaymentScheduleRepository, PaymentScheduleRepository>();
 builder.Services.AddScoped<IPaymentScheduleService, PaymentScheduleService>();
 builder.Services.AddScoped<IPaymentFlowSummaryService, PaymentFlowSummaryService>();
+builder.Services.AddScoped<IPaymentScheduleCalcService, PaymentScheduleCalcService>();
+builder.Services.AddScoped<IPaymentScheduleCalcService, PaymentScheduleCalcService>();
 
 var app = builder.Build();
 
