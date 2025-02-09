@@ -26,6 +26,7 @@ namespace Api_Hitss.Service
             {
                 PaymentSchedule paymentSchedule = new PaymentSchedule
                 {
+                    PaymentFlowSummary_Id = proposta.Id,
                     Month = numeroParcela + i,
                     Principal = _calcService.Amortizacao(proposta),
                     Interest = _calcService.Juros(proposta),

@@ -6,9 +6,11 @@ namespace Api_Hitss.Model
     {
         [Key]
         public int PaymentSchedule_Id { get; set; }
+        public int PaymentFlowSummary_Id { get; set; }
         public int Month { get; set; }
         public decimal Principal { get; set; }
         public decimal Interest { get; set; }
         public decimal Balance { get; set; }
+        public PaymentFlowSummary PaymentFlowSummary { get; set; }
     }
 }

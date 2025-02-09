@@ -5,13 +5,6 @@ namespace Api_Hitss.Service
 {
     public class PaymentScheduleCalcService : IPaymentScheduleCalcService
     {
-        public decimal Amortizacao(Proposta proposta)
-        {
-            var parcelaFixaMensal = ParcelaMensalFixa(proposta);
-            var jurosMensal = Juros(proposta);
-            return parcelaFixaMensal - jurosMensal;
-        }
-
         public decimal Juros(Proposta proposta)
         {
             return proposta.LoanAmount * TaxaJurosMensal(proposta);
@@ -55,6 +48,13 @@ namespace Api_Hitss.Service
             return saldo - valorAmortizado;
         }
 
-       
+        public decimal Amortizacao(Proposta proposta)
+        {
+            var parcelaFixaMensal = ParcelaMensalFixa(proposta);
+            var jurosMensal = Juros(proposta);
+            return parcelaFixaMensal - jurosMensal;
+        }
+
+
     }
 }
