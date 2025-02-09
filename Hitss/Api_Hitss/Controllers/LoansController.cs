@@ -1,5 +1,4 @@
-﻿using Api_Hitss.Context;
-using Api_Hitss.Interface;
+﻿using Api_Hitss.Interface;
 using Api_Hitss.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,39 +9,26 @@ namespace Api_Hitss.Controllers
     public class LoansController : ControllerBase
     {
         private readonly IPropostaService _service;
-        private readonly IPaymentFlowSummaryRepository _paymentFlowSummaryRepository;
         private readonly IPaymentScheduleService _paymentScheduleService;
+        private readonly IPaymentFlowSummaryService _paymentService;
 
-        public LoansController(IPropostaService service, IPaymentFlowSummaryRepository paymentFlowSummaryRepository,
-                                 IPaymentScheduleService paymentScheduleService)
+        public LoansController(IPropostaService service,
+                               IPaymentScheduleService paymentScheduleService,
+                               IPaymentFlowSummaryService paymentService)
         {
             _service = service;
-            _paymentFlowSummaryRepository = paymentFlowSummaryRepository;
             _paymentScheduleService = paymentScheduleService;
+            _paymentService = paymentService;
         }
 
         [HttpPost("simulate")]
         public IActionResult Simulate([FromBody] Proposta loans)
         {
             _service.Create(loans);
-
-            PaymentFlowSummary payment = new PaymentFlowSummary();
-
-            payment.TotalPayment = 56748;
-            payment.TotalInterest = 6748;
-            payment.MonthlyPayment = 236450;
-
-            _paymentFlowSummaryRepository.Create(payment);
-
+            _paymentService.Save(loans);
             _paymentScheduleService.Save(loans);
 
             return Ok("Ok");
         }
-
-        //[HttpGet("paymentschedule")]
-        //public IActionResult paymentSchedule([FromBody] PaymentFlowSummary paymentFlowSummary)
-        //{
-        //    return Ok(paymentFlowSummary);
-        //}
     }
 }
