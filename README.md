@@ -1,0 +1,1 @@
+Antes de rodar o projeto pela primeira vez, é necessario atualizar a string de conexão que fica localizada no arquivo appsettings.json

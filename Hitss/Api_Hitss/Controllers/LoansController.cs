@@ -11,17 +11,14 @@ namespace Api_Hitss.Controllers
         private readonly IPropostaService _service;
         private readonly IPaymentScheduleService _paymentScheduleService;
         private readonly IPaymentFlowSummaryService _resumoTaxService;
-        private readonly IPaymentScheduleCalcService _calcService;
 
         public LoansController(IPropostaService service,
                                IPaymentScheduleService paymentScheduleService,
-                               IPaymentFlowSummaryService paymentService,
-                               IPaymentScheduleCalcService calcService)
+                               IPaymentFlowSummaryService paymentService)
         {
             _service = service;
             _paymentScheduleService = paymentScheduleService;
             _resumoTaxService = paymentService;
-            _calcService = calcService;
         }
 
         [HttpPost("simulate")]
