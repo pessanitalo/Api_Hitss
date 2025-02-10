@@ -4,6 +4,6 @@ namespace Api_Hitss.Interface
 {
     public interface IPaymentScheduleService
     {
-        void Save(Proposta proposta);
+        void Save(Proposta proposta, int id);
     }
 }

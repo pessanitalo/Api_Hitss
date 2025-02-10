@@ -16,7 +16,7 @@ namespace Api_Hitss.Service
         public Proposta Create(Proposta proposta)
         {
            var novaProposta = _repository.Create(proposta);
-            return novaProposta;
+           return novaProposta;
         }
     }
 }

@@ -5,6 +5,6 @@ namespace Api_Hitss.Interface
     public interface IPaymentFlowSummaryRepository
     {
         PaymentFlowSummary Create(PaymentFlowSummary paymentFlowSummary);
-        //PaymentFlowSummary Detalhe();
+        IEnumerable<PaymentFlowSummary> Detalhes(int id);
     }
 }

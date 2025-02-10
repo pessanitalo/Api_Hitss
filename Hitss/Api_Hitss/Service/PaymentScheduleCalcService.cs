@@ -5,9 +5,9 @@ namespace Api_Hitss.Service
 {
     public class PaymentScheduleCalcService : IPaymentScheduleCalcService
     {
-        public decimal Juros(Proposta proposta)
+        public decimal Juros(decimal saldoAtual,Proposta proposta)
         {
-            return proposta.LoanAmount * TaxaJurosMensal(proposta);
+            return saldoAtual * TaxaJurosMensal(proposta);
         }
 
         public decimal TaxaJurosMensal(Proposta proposta)
@@ -41,20 +41,19 @@ namespace Api_Hitss.Service
             }
             return result;
         }
-        public decimal SaldoAtual(Proposta proposta)
+        public decimal SaldoAtual(decimal saldoAtual, Proposta proposta)
         {
-            var saldo = proposta.LoanAmount;
-            var valorAmortizado = Amortizacao(proposta);
+            var saldo = saldoAtual;
+            var valorAmortizado = Amortizacao(saldoAtual,proposta);
             return saldo - valorAmortizado;
         }
 
-        public decimal Amortizacao(Proposta proposta)
+        public decimal Amortizacao(decimal saldoAtual, Proposta proposta)
         {
             var parcelaFixaMensal = ParcelaMensalFixa(proposta);
-            var jurosMensal = Juros(proposta);
-            return parcelaFixaMensal - jurosMensal;
+            var jurosMensal = Juros(saldoAtual, proposta);
+            decimal valorAmortizado = parcelaFixaMensal - jurosMensal;
+            return valorAmortizado;
         }
-
-
     }
 }

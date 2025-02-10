@@ -14,6 +14,13 @@ namespace Api_Hitss.Service
             _calcService = calcService; 
         }
 
+
+        public IEnumerable<PaymentFlowSummary> Detalhes(int id)
+        {
+            var detalhes = _paymentFlowSummaryRepository.Detalhes(id);
+            return detalhes;
+        }
+
         public PaymentFlowSummary Save(Proposta proposta)
         {
             PaymentFlowSummary payment = new PaymentFlowSummary();

@@ -10,7 +10,7 @@ namespace Api_Hitss.Controllers
     {
         private readonly IPropostaService _service;
         private readonly IPaymentScheduleService _paymentScheduleService;
-        private readonly IPaymentFlowSummaryService _paymentService;
+        private readonly IPaymentFlowSummaryService _resumoTaxService;
         private readonly IPaymentScheduleCalcService _calcService;
 
         public LoansController(IPropostaService service,
@@ -20,20 +20,19 @@ namespace Api_Hitss.Controllers
         {
             _service = service;
             _paymentScheduleService = paymentScheduleService;
-            _paymentService = paymentService;
-            _calcService = calcService; 
+            _resumoTaxService = paymentService;
+            _calcService = calcService;
         }
 
         [HttpPost("simulate")]
         public IActionResult Simulate([FromBody] Proposta loans)
         {
             _service.Create(loans);
-            _paymentService.Save(loans);
-            _paymentScheduleService.Save(loans);
+            var resumoTaxa = _resumoTaxService.Save(loans);
+            _paymentScheduleService.Save(loans, resumoTaxa.PaymentFlowSummary_Id);
+            var listaDetalhes = _resumoTaxService.Detalhes(resumoTaxa.PaymentFlowSummary_Id);
 
-            var resultado = _calcService.ParcelaMensalFixa(loans);
-
-            return Ok("Ok");
+            return Ok(listaDetalhes);
         }
     }
 }

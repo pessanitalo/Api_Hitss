@@ -1,6 +1,7 @@
 ﻿using Api_Hitss.Context;
 using Api_Hitss.Interface;
 using Api_Hitss.Model;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Api_Hitss.Repository
@@ -17,6 +18,14 @@ namespace Api_Hitss.Repository
             _context.Add(paymentFlowSummary);
             _context.SaveChanges();
             return paymentFlowSummary;
+        }
+
+        public IEnumerable<PaymentFlowSummary> Detalhes(int PaymentFlowSummary_Id)
+        {
+            var lista = _context.PaymentFlowSummary.Include(c => c.PaymentSchedule)
+                    .Where(x => x.PaymentFlowSummary_Id == PaymentFlowSummary_Id)
+                    .ToList();
+            return lista;
         }
     }
 }
