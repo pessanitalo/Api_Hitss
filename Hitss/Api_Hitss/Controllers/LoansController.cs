@@ -27,6 +27,11 @@ namespace Api_Hitss.Controllers
         [HttpPost("simulate")]
         public IActionResult Simulate([FromBody] Proposta loans)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _service.Create(loans);
             var resumoTaxa = _resumoTaxService.Save(loans);
             _paymentScheduleService.Save(loans, resumoTaxa.PaymentFlowSummary_Id);
