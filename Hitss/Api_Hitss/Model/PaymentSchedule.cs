@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Api_Hitss.Model
 {
@@ -11,6 +12,7 @@ namespace Api_Hitss.Model
         public decimal Principal { get; set; }
         public decimal Interest { get; set; }
         public decimal Balance { get; set; }
+        [JsonIgnore]
         public PaymentFlowSummary PaymentFlowSummary { get; set; }
     }
 }

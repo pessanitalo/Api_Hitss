@@ -7,12 +7,14 @@ namespace Api_Hitss.Service
     {
         public decimal Juros(decimal saldoAtual,Proposta proposta)
         {
-            return saldoAtual * TaxaJurosMensal(proposta);
+            var juros = saldoAtual * TaxaJurosMensal(proposta);
+            return juros;
         }
 
         public decimal TaxaJurosMensal(Proposta proposta)
         {
-            return  proposta.AnnualInterestRate / 12;
+            var taxaMensal = proposta.AnnualInterestRate / 12;
+            return taxaMensal;
         }
 
         public decimal ParcelaMensalFixa(Proposta proposta)
